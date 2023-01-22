@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/home.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/app.css}">
+</head>
+<body>
+<!--/*@thymesVar id="customers" type="java.util.List<com.saber.site.entities.CustomerEntity>"*/-->
+<!--/*@thymesVar id="customer" type="com.saber.site.entities.CustomerEntity"*/-->
+<!--/*@thymesVar id="message" type="java.lang.String"*/-->
+<!--https://github.com/saberlee1987/spring-mvc-customer-tracker-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="nav-item nav-link active" th:href="@{/customer/add}">Add Customer</a>
+    <a class="nav-item nav-link active" th:href="@{/customer/list}">List Customer</a>
+</nav>
+
+
+    <h3>List Customers</h3>
+
+<th:block th:if="${message!=null}">
+    <p class="error" th:text="${message}"></p>
+</th:block>
+
+    <th:block th:if="${customers!=null}">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>firstName</th>
+                <th>lastName</th>
+                <th>email</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="customer:${customers}">
+                <td th:text="${customer.firstName}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td th:text="${customer.email}"></td>
+                <td><a th:href="@{/customer/update/{id}( id=${customer.id} )}"> Update </a>  </td>
+                <td><a th:href="@{/customer/delete/{id}( id=${customer.id} )}"> Delete </a>  </td>
+            </tr>
+        </table>
+    </th:block>
+</body>
+</html>
